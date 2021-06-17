@@ -1,0 +1,15 @@
+.board {
+  width: 600px;
+  height: 600px;
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+
+  .element {
+    cursor: pointer;
+    border: 1px solid black;
+
+    &.alive {
+      background-color: rgb(0, 153, 255);
+    }
+  }
+}
