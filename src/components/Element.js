@@ -7,15 +7,21 @@ export default function Element({
   setBoard,
   board,
 }) {
-  function handleClick() {
+  function toggle() {
     const newBoard = [...board]
     newBoard[rowIndex][colIndex].alive = !board[rowIndex][colIndex].alive
     setBoard(newBoard)
   }
+
   return (
     <div
       className={`element ${alive ? 'alive' : ''}`}
-      onClick={handleClick}
+      onClick={() => toggle()}
+      onMouseOver={(e) => {
+        if (e.buttons === 1) {
+          toggle()
+        }
+      }}
     ></div>
   )
 }

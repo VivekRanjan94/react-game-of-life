@@ -15,10 +15,10 @@ for (let i = 0; i < SIZE; i++) {
 export default function App() {
   const [board, setBoard] = useState(INITIAL_BOARD)
   const [int, setInt] = useState()
-  const [speed, setSpeed] = useState(500)
+  const [speed, setSpeed] = useState(250)
   const speedRef = useRef()
 
-  function handleClick() {
+  function handleStartStop() {
     if (int) {
       clearInterval(int)
       return setInt(null)
@@ -57,6 +57,18 @@ export default function App() {
     )
   }
 
+  const handleClear = () => {
+    handleStartStop()
+
+    setBoard((prevBoard) => {
+      return prevBoard.map((row) => {
+        return row.map((element) => {
+          return { ...element, alive: false }
+        })
+      })
+    })
+  }
+
   return (
     <>
       <div className='slider-cont'>
@@ -64,14 +76,15 @@ export default function App() {
         <input
           type='range'
           value={speed}
-          min='100'
-          max='2000'
+          min='50'
+          max='1000'
           onChange={handleSpeedChange}
           ref={speedRef}
         />
       </div>
       <Board board={board} setBoard={setBoard} />
-      <button onClick={handleClick}>{int ? 'Stop' : 'Start'}</button>
+      <button onClick={handleStartStop}>{int ? 'Stop' : 'Start'}</button>
+      <button onClick={handleClear}>Clear</button>
     </>
   )
 }
