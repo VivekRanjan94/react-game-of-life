@@ -25,7 +25,7 @@ export default function App() {
     }
     setInt(
       setInterval(() => {
-        setBoard(updateBoard(board))
+        setBoard(updatedBoard(board))
       }, 1 / speed)
     )
   }
@@ -52,7 +52,7 @@ export default function App() {
     clearInterval(int)
     setInt(
       setInterval(() => {
-        setBoard(updateBoard(board))
+        setBoard(updatedBoard(board))
       }, 1 / speed)
     )
   }
@@ -118,19 +118,26 @@ function checkNeighbours(board, i, j) {
   return count
 }
 
-function updateBoard(board) {
+function updatedBoard(board) {
   const newBoard = [...board]
   board.forEach((row, rowIdx) => {
     row.forEach((element, colIdx) => {
       const aliveNeighbours = checkNeighbours(board, rowIdx, colIdx)
+      // Underpopulation
+      if (element.alive && aliveNeighbours < 2) {
+        newBoard[rowIdx][colIdx].alive = false
+      }
+      // Live to the next generation
+      if (element.alive && (aliveNeighbours === 3 || aliveNeighbours === 2)) {
+        newBoard[rowIdx][colIdx].alive = true
+      }
+      // Overpopulation
       if (element.alive && aliveNeighbours > 3) {
         newBoard[rowIdx][colIdx].alive = false
       }
+      // Reproduction
       if (!element.alive && aliveNeighbours === 3) {
         newBoard[rowIdx][colIdx].alive = true
-      }
-      if (element.alive && aliveNeighbours < 2) {
-        newBoard[rowIdx][colIdx].alive = false
       }
     })
   })
