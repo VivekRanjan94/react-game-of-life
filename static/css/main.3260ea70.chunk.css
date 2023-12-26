@@ -1,2 +1,0 @@
-*,:after,:before{box-sizing:border-box;margin:0;padding:0}.board{width:600px;height:600px;display:grid;grid-template-columns:repeat(20,1fr)}.board .element{cursor:pointer;border:1px solid #000}.board .element.alive{background-color:#09f}
-/*# sourceMappingURL=main.3260ea70.chunk.css.map */

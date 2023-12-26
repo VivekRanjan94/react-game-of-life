@@ -1,0 +1,2 @@
+*,:after,:before{box-sizing:border-box;margin:0;padding:0}.board{display:grid;grid-template-columns:repeat(20,1fr);height:600px;width:600px}.board .element{border:1px solid #000;cursor:pointer}.board .element.alive{background-color:#09f}
+/*# sourceMappingURL=main.66a5e354.css.map*/
