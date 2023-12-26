@@ -15,7 +15,7 @@ for (let i = 0; i < SIZE; i++) {
 export default function App() {
   const [board, setBoard] = useState(INITIAL_BOARD)
   const [int, setInt] = useState()
-  const [speed, setSpeed] = useState(250)
+  const [speed, setSpeed] = useState(1 / 250)
   const speedRef = useRef()
 
   function handleStartStop() {
@@ -26,7 +26,7 @@ export default function App() {
     setInt(
       setInterval(() => {
         setBoard(updateBoard(board))
-      }, speed)
+      }, 1 / speed)
     )
   }
 
@@ -53,7 +53,7 @@ export default function App() {
     setInt(
       setInterval(() => {
         setBoard(updateBoard(board))
-      }, speed)
+      }, 1 / speed)
     )
   }
 
@@ -72,12 +72,12 @@ export default function App() {
   return (
     <>
       <div className='slider-cont'>
-        <label htmlFor='speed'>Speed: {speed}</label>
+        <label htmlFor='speed'>Time Interval: {speed}</label>
         <input
           type='range'
           value={speed}
-          min='50'
-          max='1000'
+          min='0.001'
+          max='0.02'
           onChange={handleSpeedChange}
           ref={speedRef}
         />
