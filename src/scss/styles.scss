@@ -1,3 +1,9 @@
 @import '_variables.scss';
 @import '_globals.scss';
-@import '_board.scss';
+@import './game';
+
+.app {
+  header {
+    text-align: center;
+  }
+}

@@ -12,7 +12,7 @@ for (let i = 0; i < SIZE; i++) {
   }
 }
 
-export default function App() {
+export default function Game() {
   const [board, setBoard] = useState(INITIAL_BOARD)
   const [int, setInt] = useState()
   const [speed, setSpeed] = useState(4)
@@ -70,22 +70,35 @@ export default function App() {
   }
 
   return (
-    <>
-      <div className='slider-cont'>
-        <label htmlFor='speed'>Speed: {speed} Updates/Second</label>
-        <input
-          type='range'
-          value={speed}
-          min={1}
-          max={20}
-          onChange={handleSpeedChange}
-          ref={speedRef}
-        />
+    <div className='game'>
+      <div className='left'>
+        <Board board={board} setBoard={setBoard} />
       </div>
-      <Board board={board} setBoard={setBoard} />
-      <button onClick={handleStartStop}>{int ? 'Stop' : 'Start'}</button>
-      <button onClick={handleClear}>Clear</button>
-    </>
+      <div className='right'>
+        <div className='slider-cont'>
+          <label className='speed-label' htmlFor='speed'>
+            {String(speed).padStart(2, '0')} Updates/Second
+          </label>
+          <input
+            className='speed'
+            type='range'
+            value={speed}
+            min={1}
+            max={20}
+            onChange={handleSpeedChange}
+            ref={speedRef}
+          />
+        </div>
+        <div className='buttons'>
+          <button className='button' onClick={handleStartStop}>
+            {int ? 'Stop' : 'Start'}
+          </button>
+          <button className='button' onClick={handleClear}>
+            Clear
+          </button>
+        </div>
+      </div>
+    </div>
   )
 }
 
